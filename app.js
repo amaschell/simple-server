@@ -1,6 +1,11 @@
+"use strict";
+
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.use(cors());
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+require('./config/routes')(app);
+
+app.listen(3001, () => console.log('App listening on port 3001!'));
