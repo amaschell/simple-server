@@ -3,14 +3,14 @@
     "id": "1",
     "firstName": "First1",
     "lastName": "Last1",
-    "description": "First1 Last1 grew up in the mountains. He is likes watching the clouds.",
+    "description": "First1 Last1 grew up in the mountains. He likes watching the clouds. Sometimes he gets lost in the woods because he thinks he can communicate with the ancient spirits.",
     "profilePicture": "user_1.png"
   },
   {
     "id": "2",
     "firstName": "First2",
     "lastName": "Last2",
-    "description": "First2 Last2 grew up in the desert. He hates snakes.",
+    "description": "First2 Last2 grew up in the desert. He hates snakes. But not like Indiana Jones hates snakes. It's more a personal thing because he was raised by snakes.",
     "profilePicture": "user_2.png"
   }
 ]
