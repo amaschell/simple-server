@@ -5,7 +5,8 @@ module.exports = function(app) {
     });
 
     app.get('/about', function (req, res) {
-        res.send('This is the about page!');
+        const allUsers = require('../test_data/users.json');
+        res.send(allUsers);
     });
 
     app.get('/posts', function (req, res) {
