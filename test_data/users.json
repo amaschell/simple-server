@@ -4,14 +4,14 @@
     "firstName": "First1",
     "lastName": "Last1",
     "description": "First1 Last1 grew up in the mountains. He is likes watching the clouds.",
-    "profilePicture": "user_1.jpg"
+    "profilePicture": "user_1.png"
   },
   {
     "id": "2",
     "firstName": "First2",
     "lastName": "Last2",
     "description": "First2 Last2 grew up in the desert. He hates snakes.",
-    "profilePicture": "user_2.jpg"
+    "profilePicture": "user_2.png"
   }
 ]
 

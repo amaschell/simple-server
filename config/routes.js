@@ -16,7 +16,7 @@ module.exports = function(app) {
 
     app.get('/posts/:id', function (req, res) {
         const allPosts = require('../test_data/posts.json');
-        const post = allPosts.find(p => p.url === req.params.id)
+        const post = allPosts.find(p => p.url === req.params.id);
         res.send(post);
     });
 };
