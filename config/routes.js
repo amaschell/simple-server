@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
     app.get('/', function(req, res){
-        res.send('This is the home page!');
+        const allPosts = require('../test_data/posts.json');
+        res.status(200).send(allPosts[0]);
     });
 
     app.get('/about', function (req, res) {
@@ -18,5 +19,9 @@ module.exports = function(app) {
         const allPosts = require('../test_data/posts.json');
         const post = allPosts.find(p => p.url === req.params.id);
         res.send(post);
+    });
+
+    app.post('/send-contact-mail', function (req, res) {
+        res.status(200).send('Mail was sent!');
     });
 };
