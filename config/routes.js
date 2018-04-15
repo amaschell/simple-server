@@ -1,21 +1,23 @@
 'use strict';
 
+// Controllers
+//const postsController  = require('../controllers/posts');
+const usersController  = require('../controllers/users');
+
 module.exports = function(app) {
 
-    app.get('/', function(req, res){
+    app.get('/', function(req, res) {
         const allPosts = require('../test_data/posts.json');
         res.status(200).send(allPosts[0]);
     });
 
-    app.get('/about', function (req, res) {
-        const allUsers = require('../test_data/users.json');
-        res.send(allUsers);
-    });
+    app.get('/about', usersController.allUsers);
 
     app.get('/posts', function (req, res) {
         const allPosts = require('../test_data/posts.json');
         res.send(allPosts);
     });
+
 
     app.get('/posts/:id', function (req, res) {
         const allPosts = require('../test_data/posts.json');
