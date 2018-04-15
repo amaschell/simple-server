@@ -15,3 +15,17 @@ module.exports.getAllPosts = function(callback) {
         );
     });
 };
+
+module.exports.getPostById = function(slug, callback) {
+
+    mysql.getConnection((connection) => {
+        connection.query(
+            queries.GET_POST,
+            [slug],
+            (error, result) => {
+                connection.release();
+                callback(error,result);
+            }
+        );
+    });
+};

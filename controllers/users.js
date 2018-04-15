@@ -7,7 +7,7 @@ module.exports.allUsers = function(request, result, next) {
 
     users.getAllAuthors((error, list) => {
         if (error) {
-            result.status(500).json({ status: 'failure', message: 'Error on the server.', internal: error });
+            result.sendStatus(500).json({ status: 'failure', message: 'Error on the server.', internal: error });
             return next();
         } else {
             async.eachSeries(
@@ -17,7 +17,7 @@ module.exports.allUsers = function(request, result, next) {
                 },
                 (error) => {
                     if (error) {
-                        result.status(500).json({ status:'failure', message: error });
+                        result.sendStatus(500).json({ status:'failure', message: error });
                         return next();
                     } else {
                         result.json(list);

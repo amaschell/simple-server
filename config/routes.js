@@ -15,11 +15,7 @@ module.exports = function(app) {
 
     app.get('/posts', postsController.allPosts);
 
-    app.get('/posts/:id', function(req, res) {
-        const allPosts = require('../test_data/posts.json');
-        const post = allPosts.find(p => p.url === req.params.id);
-        res.send(post);
-    });
+    app.get('/posts/:slug', postsController.getPostById);
 
     app.post('/send-contact-mail', function(req, res) {
         res.status(200).send('Mail was sent!');

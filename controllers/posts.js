@@ -7,7 +7,7 @@ module.exports.allPosts = function(request, result, next) {
 
     posts.getAllPosts((error, list) => {
         if (error) {
-            result.send(500).json({ status: 'failure', message: 'Error on the server.', internal: error });
+            result.sendStatus(500).json({ status: 'failure', message: 'Error on the server.', internal: error });
             return next();
         } else {
             async.eachSeries(
@@ -17,7 +17,7 @@ module.exports.allPosts = function(request, result, next) {
                 },
                 (error) => {
                     if (error){
-                        result.send(500).json({ status:'failure', message: error });
+                        result.sendStatus(500).json({ status:'failure', message: error });
                         return next();
                     } else {
                         result.json(list);
@@ -27,5 +27,21 @@ module.exports.allPosts = function(request, result, next) {
             );
         }
     });
+};
 
+module.exports.getPostById = function(request, res, next) {
+    const postUrl = request.params.slug;
+
+    posts.getPostById(postUrl, (error, result) => {
+        if (error) {
+            res.sendStatus(500).json({ status: 'failure', message: error });
+            return next();
+        } else if (result.length === 0 ) {
+            res.sendStatus(404).json({ status: 'failure', message: `The post with the url ${postId} does not exist.` });
+            return next();
+        } else {
+            res.json(result[0]);
+            return next();
+        }
+    });
 };
