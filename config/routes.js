@@ -1,8 +1,8 @@
 'use strict';
 
 // Controllers
-const postsController  = require('../controllers/posts');
-const usersController  = require('../controllers/users');
+const postsController = require('../controllers/posts');
+const usersController = require('../controllers/users');
 
 module.exports = function(app) {
 
