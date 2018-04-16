@@ -1,48 +1,53 @@
 'use strict';
 
-const posts = require('../models/posts');
+const database = require('../config/database');
+const queries = require('../config/queries');
 
-module.exports.allPosts = function(request, result, next) {
-
-    posts.getAllPosts((error, list) => {
-        if (error) {
-            result.sendStatus(500);
-        } else {
-            result.json(list);
-        }
-
-        return next();
-    });
+module.exports.allPosts = async function(request, result, next) {
+    try {
+        const postResults = await database.getInstance.performQuery(queries.GET_ALL_POSTS);
+        result.json(postResults);
+    } catch (error) {
+        console.log(error);
+        result.sendStatus(500);
+    } finally {
+        next();
+    }
 };
 
-module.exports.postBySlug = function(request, res, next) {
+module.exports.postBySlug = async function(request, result, next) {
     const postUrl = request.params.slug;
 
-    posts.getPostBySlug(postUrl, (error, result) => {
-        if (error) {
-            res.sendStatus(500);
-        } else if (result.length === 0 ) {
-            res.sendStatus(404);
-        } else {
-            res.json(result[0]);
-        }
+    try {
+        const postResult = await database.getInstance.performQuery(queries.GET_POST, [postUrl]);
 
-        return next();
-    });
+        if (postResult.length === 0) {
+            result.sendStatus(404);
+        } else {
+            result.json(postResult[0]);
+        }
+    } catch (error) {
+        console.log(error);
+        result.sendStatus(500);
+    } finally {
+        next();
+    }
 };
 
-module.exports.latestPost = function(request, res, next) {
+module.exports.latestPost = async function(request, result, next) {
+    try {
+        const latestPost = await database.getInstance.performQuery(queries.GET_LATEST_POST);
 
-    posts.getLatestPost((error, result) => {
-        if (error) {
-            res.sendStatus(500);
-        } else if (result.length === 0 ) {
+        if (latestPost.length === 0) {
             // Send empty object if there is no latest post yet!
-            res.json({});
+            result.json({});
         } else {
-            res.json(result[0]);
+            result.json(latestPost[0]);
         }
-
-        return next();
-    });
+    } catch (error) {
+        console.log(error);
+        result.sendStatus(500);
+    } finally {
+        next();
+    }
 };

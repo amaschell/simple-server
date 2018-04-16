@@ -1,17 +1,16 @@
 'use strict';
 
-const users = require('../models/users');
+const database = require('../config/database');
+const queries = require('../config/queries');
 
-module.exports.allUsers = function(request, result, next) {
-
-    users.getAllAuthors((error, list) => {
-        if (error) {
-            result.sendStatus(500);
-        } else {
-            result.json(list);
-        }
-
-        return next();
-    });
-
+module.exports.allUsers = async function(request, result, next) {
+    try {
+        const userResults = await database.getInstance.performQuery(queries.GET_ALL_USERS);
+        result.json(userResults);
+    } catch (error) {
+        console.log(error);
+        result.sendStatus(500);
+    } finally {
+        next();
+    }
 };
