@@ -29,15 +29,31 @@ module.exports.allPosts = function(request, result, next) {
     });
 };
 
-module.exports.getPostById = function(request, res, next) {
+module.exports.postBySlug = function(request, res, next) {
     const postUrl = request.params.slug;
 
-    posts.getPostById(postUrl, (error, result) => {
+    posts.getPostBySlug(postUrl, (error, result) => {
         if (error) {
             res.sendStatus(500).json({ status: 'failure', message: error });
             return next();
         } else if (result.length === 0 ) {
-            res.sendStatus(404).json({ status: 'failure', message: `The post with the url ${postId} does not exist.` });
+            res.sendStatus(404).json({ status: 'failure', message: `The post with the url ${postUrl} does not exist.` });
+            return next();
+        } else {
+            res.json(result[0]);
+            return next();
+        }
+    });
+};
+
+module.exports.latestPost = function(request, res, next) {
+
+    posts.getLatestPost((error, result) => {
+        if (error) {
+            res.sendStatus(500).json({ status: 'failure', message: error });
+            return next();
+        } else if (result.length === 0 ) {
+            res.json({});
             return next();
         } else {
             res.json(result[0]);

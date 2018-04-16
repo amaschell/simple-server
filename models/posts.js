@@ -16,7 +16,7 @@ module.exports.getAllPosts = function(callback) {
     });
 };
 
-module.exports.getPostById = function(slug, callback) {
+module.exports.getPostBySlug = function(slug, callback) {
 
     mysql.getConnection((connection) => {
         connection.query(
@@ -24,7 +24,20 @@ module.exports.getPostById = function(slug, callback) {
             [slug],
             (error, result) => {
                 connection.release();
-                callback(error,result);
+                callback(error, result);
+            }
+        );
+    });
+};
+
+module.exports.getLatestPost = function(callback) {
+
+    mysql.getConnection((connection) => {
+        connection.query(
+            queries.GET_LATEST_POST,
+            (error, result) => {
+                connection.release();
+                callback(error, result);
             }
         );
     });
