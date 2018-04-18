@@ -3,6 +3,7 @@
 // Controllers
 const postsController = require('../controllers/posts');
 const usersController = require('../controllers/users');
+const contactController = require('../controllers/contact');
 
 module.exports = function(app) {
 
@@ -14,7 +15,5 @@ module.exports = function(app) {
 
     app.get('/posts/:slug', postsController.postBySlug);
 
-    app.post('/send-contact-mail', function(req, res) {
-        res.status(200).send('Mail was sent!');
-    });
+    app.post('/send-contact-mail', contactController.sendContactFormMail);
 };

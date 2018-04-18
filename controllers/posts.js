@@ -3,19 +3,17 @@
 const database = require('../config/database');
 const queries = require('../config/queries');
 
-module.exports.allPosts = async function(request, result, next) {
+module.exports.allPosts = async function(request, result) {
     try {
         const postResults = await database.getInstance.performQuery(queries.GET_ALL_POSTS);
         result.json(postResults);
     } catch (error) {
         console.log(error);
         result.sendStatus(500);
-    } finally {
-        next();
     }
 };
 
-module.exports.postBySlug = async function(request, result, next) {
+module.exports.postBySlug = async function(request, result) {
     const postUrl = request.params.slug;
 
     try {
@@ -29,12 +27,10 @@ module.exports.postBySlug = async function(request, result, next) {
     } catch (error) {
         console.log(error);
         result.sendStatus(500);
-    } finally {
-        next();
     }
 };
 
-module.exports.latestPost = async function(request, result, next) {
+module.exports.latestPost = async function(request, result) {
     try {
         const latestPost = await database.getInstance.performQuery(queries.GET_LATEST_POST);
 
@@ -47,7 +43,5 @@ module.exports.latestPost = async function(request, result, next) {
     } catch (error) {
         console.log(error);
         result.sendStatus(500);
-    } finally {
-        next();
     }
 };
