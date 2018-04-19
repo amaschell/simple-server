@@ -2,11 +2,11 @@
 
 const express = require('express');
 const cors = require('cors');
-const app = express();
 const bodyParser = require('body-parser');
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
+const app = express();
 app.use(cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -19,4 +19,6 @@ require('./config/routes')(app);
 
 app.listen(port, () => console.log('Server listening on port %s!', port));
 
-// TODO: What to do on shutdown? Clean up!
+
+// TODO: How to exit gracefully the server and do clean up operations (database etc.)?
+// TODO: Special logger needed?

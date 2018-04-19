@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Helper function to determine if a string value is really non-empty. Only whitespace strings
+ * Helper function to determine if a string value is really non-empty or not. Whitespace-only strings
  * are also regarded as empty.
  *
- * @param stringToEvaluate The string value to test.
+ * @param {string} stringToEvaluate The string value to test.
  * @returns {boolean} True if the string is empty. False otherwise.
  */
 module.exports.isNonEmptyString = function(stringToEvaluate) {

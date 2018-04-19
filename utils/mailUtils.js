@@ -4,6 +4,14 @@ const validator = require('validator');
 const xssFilters = require('xss-filters');
 const generalUtils = require('./generalUtils');
 
+/**
+ * Extracts the contact form data from the incoming request object and generates the desired HTML content
+ * that later gets sent to the defined receiver e-mail address. Every parameter of the request body is checked
+ * against XSS vulnerabilities!
+ *
+ * @param request The incoming request object for the contact form.
+ * @returns {string} The string representing the HTML content that should get sent as mail to the desired receiver.
+ */
 module.exports.createContactFormMailContent = function(request) {
     const { email, name, message, subject } = request.body;
 
@@ -32,7 +40,16 @@ module.exports.createContactFormMailContent = function(request) {
     );
 };
 
+/**
+ * Validates the contact form data of the incoming request by returning a promise. The promise gets resolved if
+ * all required parameters are valid. Otherwise it gets rejected by using the validation errors.
+ *
+ * @param request The incoming request object for the contact form.
+ * @returns {Promise<any>} The promise wrapper. Resolved if all fields are valid.
+ *                         Rejected with the validation errors otherwise.
+ */
 module.exports.validContactFormMailContent = function(request) {
+    // Return a promise here so that the caller can easily handle if the data is valid or not.
     return new Promise(function(resolve, reject) {
         const validationErrors = [];
         const { email, name, message, subject } = request.body;
@@ -54,8 +71,10 @@ module.exports.validContactFormMailContent = function(request) {
         }
 
         if (validationErrors.length > 0) {
+            // Not valid, reject the promise by returning a string containing all validation errors.
             reject(validationErrors.join('\n'));
         } else {
+            // The contact form data is valid.
             resolve();
         }
     });

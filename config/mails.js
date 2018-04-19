@@ -1,19 +1,14 @@
 'use strict';
 
-// Insert your transporter e-mail here!
-const transporterMail = '';
 
-// Insert the password of your transporter e-mail here!
-const transporterPassword = '';
+// Insert the transporter e-mail here!
+module.exports.TRANSPORTER_MAIL = '';
 
-// Insert the service for your transporter e-mail here (E.g. 'gmail')!
-const transporterService = '';
+// Insert the password of the transporter e-mail here!
+module.exports.TRANSPORTER_PASSWORD = '';
+
+// Insert the service for the defined transporter e-mail here (E.g. 'gmail')!
+module.exports.TRANSPORTER_SERVICE = '';
 
 // Insert here the e-mail address that should always receive the contact form mails!
-const receiverMail = '';
-
-
-module.exports.transportMail = transporterMail;
-module.exports.transportPassword = transporterPassword;
-module.exports.transportService = transporterService;
-module.exports.receiverMail = receiverMail;
+module.exports.RECEIVER_MAIL = '';
