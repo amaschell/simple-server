@@ -34,7 +34,7 @@ class Database {
             // Get the connection to the pool first.
             this.pool.getConnection((connectionError, connection) => {
                 if (connectionError) {
-                    console.error('Error connecting to the database: ' + connectionError.stack);
+                    reject('Error connecting to the database: ' + connectionError.stack);
                 } else {
                     // Execute the query.
                     // Attention: If a user input value needs to be escaped, the query should contain a '?' for this
