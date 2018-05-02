@@ -34,7 +34,7 @@ class Database {
             // Get the connection to the pool first.
             this.pool.getConnection((connectionError, connection) => {
                 if (connectionError) {
-                    reject('Error connecting to the database: ' + connectionError.stack);
+                    return reject('Error connecting to the database: ' + connectionError.stack);
                 } else {
                     // Execute the query.
                     // Attention: If a user input value needs to be escaped, the query should contain a '?' for this
@@ -65,7 +65,6 @@ class Database {
             // Close the pool.
             this.pool.end((error) => {
                 if (error) {
-                    console.log(error);
                     return reject(error);
                 } else {
                     console.log('The mysql pool with all its connections has been closed.');
