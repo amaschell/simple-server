@@ -38,10 +38,13 @@ module.exports.sendContactFormMail = async function(request, result) {
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
+                console.error(error);
                 result.status(500).send(
-                    'Mail could not get sent due to an internal server error! ' +
-                    'Please contact the server administrator.'
+                    {
+                        type: 'exception',
+                        message: 'Sending contact form mail failed due to an internal error of nodemailer!',
+                        error: error
+                    }
                 );
             } else {
                 // The mail has been sent.
@@ -50,7 +53,13 @@ module.exports.sendContactFormMail = async function(request, result) {
         });
     } catch (error) {
         // Handle and propagate possible validation errors here!
-        console.log(error);
-        result.status(500).send(error);
+        console.error(error);
+        result.status(500).send(
+            {
+                type: 'exception',
+                message: 'The sending of the contact form mail failed due to an error!',
+                error: error
+            }
+        );
     }
 };
