@@ -1,6 +1,7 @@
 'use strict';
 
 const mysql = require('mysql');
+const config = require('../config/config');
 
 /**
  * A class abstracting the 'mysql' node.js driver by adding logic for promises as the mysql driver
@@ -8,13 +9,12 @@ const mysql = require('mysql');
  */
 class Database {
     constructor() {
-        // Define the user name and the password of your database here!
         this.pool = mysql.createPool({
-            connectionlimit: 5,
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'SimpleServer'
+            connectionlimit: config.getInstance.db.connectionLimit,
+            host: config.getInstance.db.host,
+            user: config.getInstance.db.user,
+            password: config.getInstance.db.password,
+            database: config.getInstance.db.name
         });
     }
 

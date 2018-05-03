@@ -2,7 +2,7 @@
 
 const nodemailer = require('nodemailer');
 const utils = require('../utils/mailUtils');
-const mailConfig = require('../config/mails');
+const config = require('../config/config');
 
 
 /**
@@ -21,18 +21,18 @@ module.exports.sendContactFormMail = async function(request, result) {
 
         // Create the mail configuration including the mail's generated HTML content.
         const mailOptions = {
-            from: mailConfig.TRANSPORTER_MAIL,
-            to: mailConfig.RECEIVER_MAIL,
+            from: config.getInstance.mail.transporterMail,
+            to: config.getInstance.mail.receiverMail,
             subject: 'SimpleBlog: Someone new contacted you!',
             html: utils.createContactFormMailContent(request)
         };
 
         // Configure the transport object for nodemailer.
         const transporter = nodemailer.createTransport({
-            service: mailConfig.TRANSPORTER_SERVICE,
+            service: config.getInstance.mail.transporterService,
             auth: {
-                user: mailConfig.TRANSPORTER_MAIL,
-                pass: mailConfig.TRANSPORTER_PASSWORD
+                user: config.getInstance.mail.transporterMail,
+                pass: config.getInstance.mail.transporterPassword
             }
         });
 

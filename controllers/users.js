@@ -1,6 +1,6 @@
 'use strict';
 
-const database = require('../config/database');
+const database = require('../database/database');
 
 
 // Gets all authors sorted in ascending order by their ids.

@@ -1,6 +1,6 @@
 'use strict';
 
-const database = require('../config/database');
+const database = require('../database/database');
 
 
 // Get all posts sorted in descending order by the creation dates (i.e. latest posts first).
