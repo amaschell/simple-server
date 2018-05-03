@@ -20,60 +20,49 @@ To install then all needed dependencies inside your local project, simply run:
 npm install
 ```
 
-### Adapting needed config files 
+### Choosing the configuration 
 
-#### Configuring the database
+Inside the `simple-server/config/config.js` file, different configurations for different environments (i.e. development,
+production, test) can be defined. The scripts that start the server (each with a specific environment) are defined
+in `simple-server/package.json`:
 
-Inside the `simple-server/config/database.js` file, the configuration parameters for
-your MySQL database need to be specified by editing the following inside the 
-constructor:
-
-```javascript
-// Define the user name and the password of your database here!
-this.pool = mysql.createPool({
-    connectionlimit: 5,
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'SimpleServer'
-});
 ```
+...
 
-To obtain a clean initial database setup without any entries, import the `simple-server/database/init.sql` file 
-in your database.
+"scripts": {
+    "start": "NODE_ENV=development node ./app",
+    "test": "NODE_ENV=test node ./app"
+},
 
-To obtain an initial state already containing some test data, import the 
-`simple-server/database/init_with_test_data.sql` file 
-in your database.
+...
+```
+ 
+#### The database
+
+Adapt the database properties in the `simple-server/config/config.js` file to match your MySQL database for your 
+desired environment.
+
+To obtain then a clean initial database setup without any entries, import the `simple-server/database/init.sql` file 
+into your database.
+
+Or, to obtain an initial state already containing some test data, import the 
+`simple-server/database/init_with_test_data.sql` file into your database.
 
 
-#### Configuring the contact form messaging
+#### The e-mail messaging
 
 To define the receiver of incoming contact form requests and to define which service should be responsible for the 
-transport of these mails, edit the following inside the `simple-server/config/mails.js` file:
-
-```javascript
-// Insert the transporter e-mail here!
-module.exports.TRANSPORTER_MAIL = '';
-
-// Insert the password of the transporter e-mail here!
-module.exports.TRANSPORTER_PASSWORD = '';
-
-// Insert the service for the defined transporter e-mail here (E.g. 'gmail')!
-module.exports.TRANSPORTER_SERVICE = '';
-
-// Insert here the e-mail address that should always receive the contact form mails!
-module.exports.RECEIVER_MAIL = '';
-```
+transport of these mails, edit the respective mailing properties inside the `simple-server/config/config.js` file 
+for your desired environment.
 
 
-### Running the server locally
+### Running the server locally in development mode
 
-To run the server then locally on your machine, just execute the following command in the root directory of 
-your local project:
+To run the server then in development mode locally on your machine, just execute the following command in the root 
+directory of your local project:
 
 ```sh
-node app.js
+npm start
 ```
 
 
